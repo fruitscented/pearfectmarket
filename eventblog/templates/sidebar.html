@@ -1,0 +1,44 @@
+  <head>
+    <style>
+      .button {
+        display: inline-block;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        color: #ffffff;
+        background-color: #BA55D3;
+        border-radius: 6px;
+        outline: none;
+        transition: 0.3s;
+      }
+      .button:hover {
+        background-color: #c2c7c7;
+      }
+    </style>
+  </head>
+
+<div class="col-span-1">
+  <div class="border rounded-md mb-4">
+    <div class="bg-slate-200 p-4">Search</div>
+    <div class="p-4">
+      <form action="" method="get">
+        <input type="text" name="search" id="search" class="border rounded-md w-44 focus:ring p-2" placeholder="Search something...">
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 rounded-md p-2 text-black uppercase font-semibold font-sans w-fit focus:ring">Search</button>
+      </form>
+    </div>
+  </div>
+  <div class="border rounded-md mb-4">
+    <div class="bg-slate-200 p-4">Tags</div>
+    <div class="p-4">
+      {% for tag in tags %}
+      <span class="mr-2"
+        ><a
+          href="{% url 'tag' tag.slug %}"
+          class="button"
+          >{{ tag.name }}</a
+        ></span
+      >
+      {% endfor %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+{% block title %}
+<title>Page Title</title>
+{% endblock %}
+
+{% block content %}
+  <head>
+    <style>
+      .button {
+        display: inline-block;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        color: #ffffff;
+        background-color: #BA55D3;
+        border-radius: 6px;
+        outline: none;
+        transition: 0.3s;
+      }
+      .button:hover {
+        background-color: #c2c7c7;
+      }
+    </style>
+  </head>
+
+<div class="grid grid-cols-4 gap-4 py-10">
+  <div class="col-span-3">
+
+    <img
+        class="rounded-md object-cover h-96 w-full"
+        src="{{ post.featured_image.url }}"
+        alt="..."
+    />
+    <h2 class="mt-5 mb-2 text-center text-2xl font-bold">{{ post.title }}</h2>
+    <p class="mb-5 text-center text-sm text-slate-500 italic">By {{ post.user|capfirst }} | {{ post.created_at }}</p>
+
+    <div>{{ post.content|safe }}</div>
+
+    <div class="my-5">
+        {% for tag in post.tag.all %}
+          <a href="{% url 'tag' tag.slug %}" class="button">{{ tag.name }}</a>
+        {% endfor %}
+    </div>
+
+  </div>
+  {% include "sidebar.html" %}
+</div>
+{% endblock %}
