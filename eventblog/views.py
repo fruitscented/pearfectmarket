@@ -82,7 +82,6 @@ def search(request):
 def tagfilter(request):
     posts = Post.objects.all()
     tags = Tag.objects.all()
-    queryset = []
     for word in request.POST.getlist('q'):
         posts = Post.objects.filter(Q(tag__name__icontains=word))
     context = {
