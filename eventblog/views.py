@@ -1,3 +1,7 @@
+from functools import reduce
+from operator import or_
+
+from django.db.models import Q
 from django.shortcuts import render
 
 from .models import *
@@ -11,6 +15,7 @@ def home(request):
         'posts': posts,
         'tags': tags,
     })
+
 
 def tag(request, slug):
     posts = Post.objects.filter(tag__slug=slug).filter(is_published=True)
@@ -51,3 +56,38 @@ def post(request, slug):
         },
     )
 
+
+def search(request):
+    posts = Post.objects.all()
+    tags = Tag.objects.all()
+    context = {
+        'posts': posts,
+        'tags': tags,
+        'keyword': ''
+    }
+    keyword = request.POST.get('keyword')
+    if keyword:
+        keyword = keyword.lower()
+        posts = Post.objects.filter(
+            Q(title__icontains=keyword) | Q(content__icontains=keyword) | Q(tag__name__icontains=keyword))
+        context = {
+            'posts': posts,
+            'tags': tags,
+            'keyword': keyword
+        }
+
+    return render(request, 'search.html', context)
+
+
+def tagfilter(request):
+    posts = Post.objects.all()
+    tags = Tag.objects.all()
+    queryset = []
+    for word in request.POST.getlist('q'):
+        posts = Post.objects.filter(Q(tag__name__icontains=word))
+    context = {
+            'posts': posts,
+            'tags': tags,
+        }
+
+    return render(request, 'tagfilter.html', context)
