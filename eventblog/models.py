@@ -8,6 +8,8 @@ class Tag(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, default='')
 
+    class Meta:
+        ordering = ['name']
     def __str__(self):
         return self.name
 
