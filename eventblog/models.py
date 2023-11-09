@@ -14,6 +14,23 @@ class Tag(models.Model):
         return self.name
 
 
+class Subtag(models.Model):
+    tag = models.ForeignKey(Tag,
+                                 related_name='tag',
+                                 on_delete=models.CASCADE)
+    name = models.CharField(max_length=200,
+                            db_index=True)
+    slug = models.SlugField(max_length=200,
+                            db_index=True)
+
+    class Meta:
+        ordering = ('name',)
+        verbose_name = 'subtag'
+        verbose_name_plural = 'subtags'
+
+    def __str__(self):
+        return self.name
+
 class Post(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, default='')
@@ -24,7 +41,7 @@ class Post(models.Model):
     created_at = models.DateField(auto_now=True)
 
     # Define relations
-    tag = models.ManyToManyField(Tag)
+    subtag = models.ManyToManyField(Subtag)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
 
     class Meta:

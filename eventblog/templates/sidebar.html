@@ -48,10 +48,13 @@
         <form method="POST" action="{% url 'tagfilter' %}" class="border rounded-md w-full focus:ring p-2 col-span-3">
           {% csrf_token %}
           {% for tag in tags %}
+            {{tag.name}}
+            {% for subtag in tag.tag.all %}
               <div class="button">
-                <input type="checkbox" id="{{tag.name}}" value="{{tag.name}}" name="q">
-                <label for="{{tag.name}}">{{tag.name}}</label>
+                <input type="checkbox" id="{{subtag.name}}" value="{{subtag.name}}" name="q">
+                <label for="{{subtag.name}}">{{subtag.name}}</label>
               </div>
+            {% endfor %}
           {% endfor %}
 
           <button type="submit" class="bg-blue-500 hover:bg-blue-700 rounded-md p-2 text-black uppercase font-semibold font-sans w-full focus:ring col-span-1">submit</button>

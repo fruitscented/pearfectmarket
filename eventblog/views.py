@@ -9,21 +9,27 @@ from .models import *
 
 def home(request):
     posts = Post.objects.all().filter(is_published=True)
+    subtags = Subtag.objects.all()
     tags = Tag.objects.all()
 
     return render(request, 'home.html', {
         'posts': posts,
-        'tags': tags,
+        'subtags': subtags,
+        'tags':tags,
     })
 
 
 def tag(request, slug):
     posts = Post.objects.filter(tag__slug=slug).filter(is_published=True)
-    requested_tag = Tag.objects.get(slug=slug)
+    requested_subtag = Subtag.objects.get(slug=slug)
+    subtags = Subtag.objects.all()
     tags = Tag.objects.all()
+    requested_tag = Tag.objects.get(slug=slug)
 
     return render(request, 'tag.html', {
         'posts': posts,
+        'subtag': requested_subtag,
+        'subtags': subtags,
         'tag': requested_tag,
         'tags': tags,
     })
@@ -31,6 +37,7 @@ def tag(request, slug):
 
 def post(request, slug):
     requested_post = Post.objects.get(slug=slug)
+    subtags = Subtag.objects.all()
     tags = Tag.objects.all()
 
     # Related Posts
@@ -51,7 +58,8 @@ def post(request, slug):
         "post.html",
         {
             "post": requested_post,
-            "tags": tags,
+            "subtags": subtags,
+            'tags':tags,
             "related_posts": related_posts,
         },
     )
@@ -59,20 +67,23 @@ def post(request, slug):
 
 def search(request):
     posts = Post.objects.all()
+    subtags = Subtag.objects.all()
     tags = Tag.objects.all()
     context = {
         'posts': posts,
-        'tags': tags,
+        'subtags': subtags,
+        'tags':tags,
         'keyword': ''
     }
     keyword = request.POST.get('keyword')
     if keyword:
         keyword = keyword.lower()
         posts = Post.objects.filter(
-            Q(title__icontains=keyword) | Q(content__icontains=keyword) | Q(tag__name__icontains=keyword))
+            Q(title__icontains=keyword) | Q(content__icontains=keyword) | Q(subtag__name__icontains=keyword))
         context = {
             'posts': posts,
-            'tags': tags,
+            'subtags': subtags,
+            'tags':tags,
             'keyword': keyword
         }
 
@@ -81,11 +92,14 @@ def search(request):
 
 def tagfilter(request):
     posts = Post.objects.all()
+    subtags = Subtag.objects.all()
     tags = Tag.objects.all()
+    posts = Post.objects.all()
     for word in request.POST.getlist('q'):
-        posts = Post.objects.filter(Q(tag__name__icontains=word))
+        posts = posts.filter(Q(subtag__name__icontains=word))
     context = {
             'posts': posts,
+            'subtags': subtags,
             'tags': tags,
         }
 

@@ -64,12 +64,12 @@
       </p>
 
       <div class="p-4">
-      {% for tag in post.tag.all %}
+      {% for subtag in post.subtag.all %}
       <span class="mr-2"
         ><a
-          href="{% url 'tag' tag.slug %}"
+          href="{% url 'subtag' subtag.slug %}"
           class="button"
-          >{{ tag.name }}</a
+          >{{ subtag.name }}</a
         ></span
       >
       {% endfor %}
