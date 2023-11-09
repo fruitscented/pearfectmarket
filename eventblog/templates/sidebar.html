@@ -3,7 +3,7 @@
       .right-sidebar{
         position:absolute;
         top:270px;
-        right:0;
+        right:50px;
         width:400px;
         height:100%;
         }
@@ -44,6 +44,7 @@
         </button>
       </form>
     </div>
+      <hr>
       <div class="bg-slate-200 p-4">Pear Tags</div>
         <form method="POST" action="{% url 'tagfilter' %}" class="border rounded-md w-full focus:ring p-2 col-span-3">
           {% csrf_token %}
@@ -55,7 +56,8 @@
                 <label for="{{subtag.name}}">{{subtag.name}}</label>
               </div>
             {% endfor %}
-            <hr>
+            <br>
+            <br>
           {% endfor %}
 
           <button type="submit" class="bg-blue-500 hover:bg-blue-700 rounded-md p-2 text-black uppercase font-semibold font-sans w-full focus:ring col-span-1">submit</button>
