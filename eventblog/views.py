@@ -19,18 +19,16 @@ def home(request):
     })
 
 
-def tag(request, slug):
-    posts = Post.objects.filter(tag__slug=slug).filter(is_published=True)
+def subtag(request, slug):
+    posts = Post.objects.filter(subtag__slug=slug).filter(is_published=True)
     requested_subtag = Subtag.objects.get(slug=slug)
     subtags = Subtag.objects.all()
     tags = Tag.objects.all()
-    requested_tag = Tag.objects.get(slug=slug)
 
     return render(request, 'tag.html', {
         'posts': posts,
         'subtag': requested_subtag,
         'subtags': subtags,
-        'tag': requested_tag,
         'tags': tags,
     })
 
