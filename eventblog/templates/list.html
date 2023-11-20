@@ -3,7 +3,7 @@
       hr {
       height:3px;
       border-width:0;
-      background-color:#808080;
+      background-color:#DCDCDC;
     }
       .button {
         display: inline-block;
@@ -37,6 +37,7 @@
       min-width: 600px;
       max-width:600px;
       height: auto;
+      padding-left: 80px;
       }
 
     </style>
@@ -47,7 +48,7 @@
   {% for post in posts %}
   <!-- post -->
   <hr>
-  <div class="mb-4 ring-1 ring-slate-200 rounded-md h-fit hover:shadow-md">
+  <div class="border rounded-md mb-4">
     <a href="{% url 'post' post.slug %}"
       ><img
         class="img"
@@ -60,7 +61,7 @@
       </div>
       <h2 class="text-lg font-bold">{{ post.title }}</h2>
       <p class="text-base">
-        {{ post.content|striptags|linebreaks }}
+        {{ post.content|safe }}
       </p>
 
       <div class="p-4">
@@ -73,6 +74,7 @@
         ></span
       >
       {% endfor %}
+        <br>
       </div>
     </div>
   </div>

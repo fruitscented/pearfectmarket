@@ -17,6 +17,8 @@
         border-radius: 6px;
         outline: none;
         transition: 0.3s;
+        font-size: 13px;
+        margin: 4px;
       }
       .button:hover {
         background-color: #c2c7c7;
@@ -26,7 +28,6 @@
 
 <div class="right-sidebar">
   <div class="border rounded-md mb-4">
-    <div class="bg-slate-200 p-4">Search</div>
     <div class="p-4">
       <form action="{% url 'search' %}" method="POST" class="grid grid-cols-4 gap-2">
         {% csrf_token %}
@@ -44,12 +45,14 @@
         </button>
       </form>
     </div>
-      <hr>
-      <div class="bg-slate-200 p-4">Pear Tags</div>
+  </div>
+    <div class="border rounded-md mb-4">
+      <div class="p-4">
+      <div class="bg-slate-200 p-4">Pear Tags:</div>
         <form method="POST" action="{% url 'tagfilter' %}" class="border rounded-md w-full focus:ring p-2 col-span-3">
           {% csrf_token %}
           {% for tag in tags %}
-            {{tag.name}}
+            <div class="bg-slate-200 p-4">{{tag.name}}</div>
             {% for subtag in tag.tag.all %}
               <div class="button">
                 <input type="checkbox" id="{{subtag.name}}" value="{{subtag.name}}" name="q">
@@ -62,6 +65,6 @@
 
           <button type="submit" class="bg-blue-500 hover:bg-blue-700 rounded-md p-2 text-black uppercase font-semibold font-sans w-full focus:ring col-span-1">submit</button>
         </form>
-</div>
+      </div>
   </div>
 </div>
