@@ -6,5 +6,6 @@ urlpatterns = [
     path('post/<slug:slug>', views.post, name='post'),
     path('subtag/<slug:slug>', views.subtag, name='subtag'),
     path('search', views.search, name='search'),
-    path('tagfilter', views.tagfilter, name='tagfilter')
+    path('tagfilter', views.tagfilter, name='tagfilter'),
+    path('contact', views.contact, name='contact')
 ]

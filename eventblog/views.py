@@ -1,9 +1,11 @@
 from functools import reduce
 from operator import or_
 
+from blog.utils import slugify
 from django.db.models import Q
 from django.shortcuts import render
 
+from .forms import PostForm
 from .models import *
 
 
@@ -15,7 +17,7 @@ def home(request):
     return render(request, 'home.html', {
         'posts': posts,
         'subtags': subtags,
-        'tags':tags,
+        'tags': tags,
     })
 
 
@@ -57,7 +59,7 @@ def post(request, slug):
         {
             "post": requested_post,
             "subtags": subtags,
-            'tags':tags,
+            'tags': tags,
             "related_posts": related_posts,
         },
     )
@@ -70,7 +72,7 @@ def search(request):
     context = {
         'posts': posts,
         'subtags': subtags,
-        'tags':tags,
+        'tags': tags,
         'keyword': ''
     }
     keyword = request.POST.get('keyword')
@@ -81,7 +83,7 @@ def search(request):
         context = {
             'posts': posts,
             'subtags': subtags,
-            'tags':tags,
+            'tags': tags,
             'keyword': keyword
         }
 
@@ -96,9 +98,18 @@ def tagfilter(request):
     for word in request.POST.getlist('q'):
         posts = posts.filter(Q(subtag__name__icontains=word))
     context = {
-            'posts': posts,
-            'subtags': subtags,
-            'tags': tags,
-        }
+        'posts': posts,
+        'subtags': subtags,
+        'tags': tags,
+    }
 
     return render(request, 'tagfilter.html', context)
+
+
+def contact(request):
+    form = PostForm()
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+    return render(request, "contact.html", {"form": form})

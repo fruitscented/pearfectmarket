@@ -3,21 +3,21 @@ from ckeditor.fields import RichTextField
 from django.conf import settings
 
 
-
 class Tag(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, default='')
 
     class Meta:
         ordering = ['name']
+
     def __str__(self):
         return self.name
 
 
 class Subtag(models.Model):
     tag = models.ForeignKey(Tag,
-                                 related_name='tag',
-                                 on_delete=models.CASCADE)
+                            related_name='tag',
+                            on_delete=models.CASCADE)
     name = models.CharField(max_length=200,
                             db_index=True)
     slug = models.SlugField(max_length=200,
@@ -30,6 +30,19 @@ class Subtag(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Contact(models.Model):
+    title = models.CharField(max_length=200)
+    content = models.TextField(max_length=1000)
+    featured_image = models.ImageField(upload_to="images/", default='', null=True, blank=True)
+
+    # Define relations
+    subtag = models.ManyToManyField(Subtag)
+
+    def __str__(self):
+        return self.title
+
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
@@ -46,5 +59,6 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+
     def __str__(self):
         return self.title
