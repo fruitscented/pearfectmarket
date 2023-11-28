@@ -34,11 +34,12 @@
     <p>-Type of Vendors Needed</p>
     <p>-Vendor Fee</p>
     <p>-Event Contact Information</p>
+                    <p>-Additional Pear tags you want to add</p>
                     <br>
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ form.as_p }}
-                        <p>*Hold down “Control”, or “Command” on a Mac, to select more than one sub tag</p>
+                        <p>*Hold down “Control”, or “Command” on a Mac, to select more than one Pear tag</p>
                         <button class="button is-success is-fullwidth is-medium mt-5"
                                 type="submit">Submit
                         </button>

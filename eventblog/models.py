@@ -39,7 +39,7 @@ class Contact(models.Model):
     featured_image = models.ImageField(upload_to="images/", default='', null=True, blank=True)
 
     # Define relations
-    subtag = models.ManyToManyField(Subtag)
+    pear_tags = models.ManyToManyField(Subtag)
 
     def __str__(self):
         return self.title
