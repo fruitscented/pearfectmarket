@@ -17,15 +17,27 @@
 </header>
 
 
+
 <div class="container">
     <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-8 mt-3 left">
             <div class="card mb-4">
                 <div class="card-body">
+                    <h2>Got an event you want to add? Submit here!</h2>
+    <h4>Please include:</h4>
+    <p>-Event name</p>
+    <p>-Date</p>
+    <p>-Time</p>
+    <p>-Set Up Time</p>
+    <p>-Location</p>
+    <p>-Type of Vendors Needed</p>
+    <p>-Vendor Fee</p>
+    <p>-Contact Information</p>
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ form.as_p }}
+                        <p>*Hold down “Control”, or “Command” on a Mac, to select more than one sub tag</p>
                         <button class="button is-success is-fullwidth is-medium mt-5"
                                 type="submit">Submit
                         </button>
