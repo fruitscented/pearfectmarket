@@ -33,6 +33,7 @@ class Subtag(models.Model):
 
 
 class Contact(models.Model):
+    your_contact_info = models.CharField(max_length=400, default='')
     title = models.CharField(max_length=200)
     content = models.TextField(max_length=1000)
     featured_image = models.ImageField(upload_to="images/", default='', null=True, blank=True)
