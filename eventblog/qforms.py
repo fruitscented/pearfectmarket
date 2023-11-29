@@ -2,12 +2,11 @@ from ckeditor.fields import RichTextField
 from django import forms
 from django.db.models import ManyToManyField
 from django.forms import SlugField
-from .models import Submission, Subtag
+from .models import Question
 
 
-class PostForm(forms.ModelForm):
-
+class QForm(forms.ModelForm):
     class Meta:
-        model = Submission
+        model = Question
         fields = '__all__'
 

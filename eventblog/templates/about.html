@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<header class="masthead">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class=" col-md-8 col-md-10 mx-auto">
+                <div class="site-heading">
+
+                    <h3 class=" site-heading my-4 mt-3 text-white"><img src="/media/images/pearfectmarketlogo.png" alt="HTML5 Icon" style="width:100px;height:100px;"> Pearfect Market </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+<div class="container">
+    <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-md-8 mt-3 left">
+            <div class="card mb-4">
+                <div class="card-body">
+                  <h1>About</h1>
+                  <p>Pearfect Market is a website where local small
+                    business owners can search for upcoming events to
+                  vend and hold shop at. Each post includes event descriptions
+                  and tags to help filter through different event posts.</p>
+                  <p>This website is still in development, and we encourage you
+                  to contact us with questions and suggestions.</p>
+                  <p>Iris Ong: long@unomaha.edu</p>
+                  <p>Violeta Jacinto-Flores: vjacinto-flores@unomaha.edu </p>
+                    <br>
+                    <br>
+                    <h3>Questions and Suggestions</h3>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ qform.as_p }}
+                        <button class="button is-success is-fullwidth is-medium mt-5"
+                                type="submit">Submit
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

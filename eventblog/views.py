@@ -7,10 +7,11 @@ from django.shortcuts import render
 
 from .forms import PostForm
 from .models import *
+from .qforms import QForm
 
 
 def home(request):
-    posts = Post.objects.all().filter(is_published=True)
+    posts = Post.objects.all().filter(is_published=True).order_by('-created_at')
     subtags = Subtag.objects.all()
     tags = Tag.objects.all()
 
@@ -113,3 +114,12 @@ def contact(request):
         if form.is_valid():
             form.save()
     return render(request, "contact.html", {"form": form})
+
+
+def about(request):
+    qform = QForm()
+    if request.method == 'POST':
+        qform = QForm(request.POST, request.FILES)
+        if qform.is_valid():
+            qform.save()
+    return render(request, "about.html", {"qform": qform})

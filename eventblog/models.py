@@ -32,7 +32,7 @@ class Subtag(models.Model):
         return self.name
 
 
-class Contact(models.Model):
+class Submission(models.Model):
     your_name_and_contact_information = models.CharField(max_length=400, default='')
     title = models.CharField(max_length=200)
     content = models.TextField(max_length=1000)
@@ -63,3 +63,13 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Question(models.Model):
+    name = models.CharField(max_length=400, default='')
+    phone_or_email = models.CharField(max_length=200)
+    content = models.TextField(max_length=1000)
+
+    def __str__(self):
+        return self.name
+
