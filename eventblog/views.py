@@ -79,7 +79,7 @@ def search(request):
     if keyword:
         keyword = keyword.lower()
         posts = Post.objects.filter(
-            Q(title__icontains=keyword) | Q(content__icontains=keyword) | Q(subtag__name__icontains=keyword))
+            Q(title__icontains=keyword) | Q(content__icontains=keyword) | Q(subtag__name__icontains=keyword)).distinct()
         context = {
             'posts': posts,
             'subtags': subtags,
