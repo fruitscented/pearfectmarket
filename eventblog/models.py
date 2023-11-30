@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 from ckeditor.fields import RichTextField
 from django.conf import settings
@@ -33,13 +35,21 @@ class Subtag(models.Model):
 
 
 class Submission(models.Model):
-    your_name_and_contact_information = models.CharField(max_length=400, default='')
+    your_name = models.CharField(max_length=200, default='')
+    contact_information = models.CharField(max_length=200, default='')
+    check_if_you_are_the_event_host = models.BooleanField(default=False)
+    event_host_contact_information = models.CharField(max_length=200, default='')
     title = models.CharField(max_length=200)
-    content = models.TextField(max_length=1000)
-    featured_image = models.ImageField(upload_to="images/", default='', null=True, blank=True)
+    event_date_and_time = models.CharField(max_length=200, default='')
+    event_setup_time = models.CharField(max_length=200, default='')
+    location = models.CharField(max_length=200, default='')
+    vendor_fee = models.CharField(max_length=200, default='')
+    additional_information = models.TextField(max_length=1000)
+    event_flyer = models.ImageField(upload_to="images/", default='', null=True, blank=True)
 
     # Define relations
     pear_tags = models.ManyToManyField(Subtag)
+    additional_pear_tags = models.CharField(max_length=200, default='')
 
     def __str__(self):
         return self.title
