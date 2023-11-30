@@ -30,7 +30,7 @@
                         {% csrf_token %}
                         {{ form.as_p }}
                         <p>*Hold down “Control”, or “Command” on a Mac, to select more than one Pear tag</p>
-                        <button class="button is-success is-fullwidth is-medium mt-5"
+                        <button class="button is-success is-fullwidth is-medium mt-5" onclick="return confirm('Successfully submitted!');"
                                 type="submit">Submit
                         </button>
                     </form>

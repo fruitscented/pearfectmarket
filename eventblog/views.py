@@ -113,6 +113,7 @@ def submissions(request):
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            form = PostForm
     return render(request, "submissions.html", {"form": form})
 
 
@@ -122,4 +123,5 @@ def about(request):
         qform = QForm(request.POST, request.FILES)
         if qform.is_valid():
             qform.save()
+            qform = QForm()
     return render(request, "about.html", {"qform": qform})

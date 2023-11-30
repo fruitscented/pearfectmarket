@@ -39,7 +39,7 @@
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ qform.as_p }}
-                        <button class="button is-success is-fullwidth is-medium mt-5"
+                        <button class="button is-success is-fullwidth is-medium mt-5" onclick="return confirm('Successfully submitted!');"
                                 type="submit">Submit
                         </button>
                     </form>
