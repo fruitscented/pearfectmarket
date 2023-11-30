@@ -107,13 +107,13 @@ def tagfilter(request):
     return render(request, 'tagfilter.html', context)
 
 
-def contact(request):
+def submissions(request):
     form = PostForm()
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-    return render(request, "contact.html", {"form": form})
+    return render(request, "submissions.html", {"form": form})
 
 
 def about(request):

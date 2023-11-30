@@ -7,6 +7,6 @@ urlpatterns = [
     path('subtag/<slug:slug>', views.subtag, name='subtag'),
     path('search', views.search, name='search'),
     path('tagfilter', views.tagfilter, name='tagfilter'),
-    path('contact', views.contact, name='contact'),
+    path('submissions', views.submissions, name='submissions'),
     path('about', views.about, name='about')
 ]
